@@ -6,27 +6,38 @@ batasan dan kendala : setelah 1500,2000,500
 
 
 const data = [
-  {nama:"John"},
-  {nama:"Ed"},
-  {nama:"Jane"},
+  {name:"John"},
+  {name:"Ed"},
+  {name:"Jane"},
 ];
 
-console.log(data[0].nama)
+const time = [500,1500,2000];
 
-const showName = (data) =>{
-  return new Promises((resolve,reject)=>{
+const showName = (data,time) => {
+  return new Promise((resolve,reject)=>{
+    const dataArr =
+     Object.values(data)
     setTimeout(()=>{
-        resolve(data[0].name)
-    },1500)
+      for(let i of dataArr){
+        resolve([i])
+      }      
+    },()=>{
+      for(let i of time){
+        return [i]
+      }})
    reject("Fetch data gagal")
   })
 };
 
 
-// showName()
-//   .then()
-//   .then()
-//   .catch()
+showName(data,...time)
+  .then((data,time)=>{
+    console.log(data)
+  })
+  // .then()
+  .catch(err =>{
+    console.log(err)
+  })
 
 const asyncAwaitFn = async () =>{
   try{
@@ -36,6 +47,4 @@ const asyncAwaitFn = async () =>{
   catch(err){
     console.log(`${err}`)
   }
-   const result = await showName()
-   return result
 }
