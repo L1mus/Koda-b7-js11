@@ -25,6 +25,7 @@ const showName = (data) =>{
 
 // showName()
 //   .then()
+//   .then()
 //   .catch()
 
 const asyncAwaitFn = async () =>{
