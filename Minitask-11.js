@@ -13,7 +13,7 @@ const data = [
 //Promise
 const janjiNama = (nama, waktu) => {
   return new Promise((resolve, reject) => {
-    if (nama === "string" || waktu === "number") {
+    if (typeof nama !== "string" || typeof waktu !== "number") {
       reject("Gagal Fetch");
     }
     setTimeout(() => {
