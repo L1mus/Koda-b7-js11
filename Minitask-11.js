@@ -1,45 +1,49 @@
 /*
-input: nama : string
+input: nama : string , waktu : number
 output : logging text string name
 batasan dan kendala : setelah 1500,2000,500
 */
 
+const data = [
+  { nama: "jane", waktu: 500 },
+  { nama: "ed", waktu: 1500 },
+  { nama: "john", waktu: 2000 },
+];
 
-const data = ["john","ed","jane"];
+//Promise
+const janjiNama = (nama, waktu) => {
+  return new Promise((resolve, reject) => {
+    if (nama === "string" || waktu === "number") {
+      reject("Gagal Fetch");
+    }
+    setTimeout(() => {
+      resolve(nama);
+    }, waktu);
+  });
+};
 
-const time = [500,1500,2000];
+let chainingPromise = Promise.resolve();
 
-data.forEach((value)=>{
-  const janjiJiwa = (time)=>{
+data.forEach((element) => {
+  chainingPromise = chainingPromise.then(() => {
+    return janjiNama(element.nama, element.waktu).then((result) => {
+      console.log(result);
+    });
+  });
+});
+chainingPromise.catch((error) => {
+  console.log(error);
+});
 
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-              return resolve(value)
-    },time)
+const AsyncAwaitjanjiNama = async () => {
+  try {
+    for (let element of data) {
+      const result = await janjiNama(element.nama, element.waktu);
+      console.log(result);
+    }
+  } catch (err) {
+    console.log(err);
   }
+};
 
-  janjiJiwa(500)
-  .then((value)=>{
-    console.log(value)
-  })
-  .catch(err=>{
-    console.log(err)
-  })
-})
-
-
-
-data.forEach((value)=>{
-  const janjiJiwa = (time)=>{
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-              return resolve(value)
-    },time)
-    return reject("Fetch gagal")})
-  }
-
-const asyncAwait = async () => {
-  const data = await jajiJiwa(500)
-  console.log(data)
-}
-})
+AsyncAwaitjanjiNama();
